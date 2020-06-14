@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { fetchData } from "../api";
 import Cards from "../components/Cards";
+import SearchBar from "../components/SearchBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
 
@@ -44,6 +45,7 @@ class CovidPage extends Component {
             <CircularProgress />
           </this.Wrapper>
         )}
+        <SearchBar />
       </div>
     );
   }
