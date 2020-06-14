@@ -1,11 +1,8 @@
 import React from "react";
+import CovidPage from "./containers/CovidPage";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Hi</h1>
-    </div>
-  );
+  return <CovidPage />;
 }
 
 export default App;
