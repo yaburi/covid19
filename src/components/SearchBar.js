@@ -20,11 +20,7 @@ const SearchBar = ({ handleChange, countrySelected }) => {
   useEffect(() => {
     async function getCountries() {
       setCountriesList(await fetchCountryList());
-      if (!countries) {
-        return <CircularProgress />;
-      }
     }
-
     getCountries();
   }, []);
 
