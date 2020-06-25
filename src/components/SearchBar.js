@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import InputLabel from "@material-ui/core/InputLabel";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
