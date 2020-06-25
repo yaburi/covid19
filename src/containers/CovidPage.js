@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { fetchData } from "../api";
 import Cards from "../components/Cards";
+import Map from "../components/Map";
+import SearchBar from "../components/SearchBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
 
@@ -8,14 +10,21 @@ class CovidPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      covidData: null,
+      countrySelected: "",
     };
   }
 
   async componentDidMount() {
     const covidData = await fetchData();
-    this.setState({ data: covidData });
+    this.setState({ covidData: covidData });
   }
+
+  handleChange = async (country) => {
+    this.setState({ countrySelected: country });
+    const covidData = await fetchData(country);
+    this.setState({ covidData: covidData });
+  };
 
   TitleBar = styled.header`
     text-align: center;
@@ -33,17 +42,25 @@ class CovidPage extends Component {
   `;
 
   render() {
-    const { data } = this.state;
+    const { covidData, countrySelected } = this.state;
+    if (!covidData) {
+      return (
+        <this.Wrapper>
+          <CircularProgress />
+        </this.Wrapper>
+      );
+    }
     return (
       <div>
         <this.TitleBar>Covid-19 Statistics</this.TitleBar>
-        {data ? (
-          <Cards data={data} />
-        ) : (
-          <this.Wrapper>
-            <CircularProgress />
-          </this.Wrapper>
-        )}
+        <Cards data={covidData} countrySelected={countrySelected} />
+        <this.Wrapper>
+          <SearchBar
+            handleChange={this.handleChange}
+            countrySelected={countrySelected}
+          />
+          <Map countrySelected />
+        </this.Wrapper>
       </div>
     );
   }
