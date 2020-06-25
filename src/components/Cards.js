@@ -26,7 +26,10 @@ const borderColor = {
   confirmed: "5px solid orange",
 };
 
-const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
+const CardDetail = ({
+  data: { confirmed, deaths, recovered, lastUpdate },
+  countrySelected,
+}) => {
   const confirmedCases = (
     <NumberFormat
       value={confirmed.value}
@@ -54,6 +57,9 @@ const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
       <LastUpdated>{`Last Updated: ${new Date(
         lastUpdate
       ).toDateString()}`}</LastUpdated>
+      <LastUpdated>
+        {countrySelected ? countrySelected : "Global Count"}
+      </LastUpdated>
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <CardBox borderColor={borderColor.confirmed}>

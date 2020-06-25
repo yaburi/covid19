@@ -1,28 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputLabel from "@material-ui/core/InputLabel";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { countries } from "../data/countries";
+import { fetchCountryList } from "../api";
 
-const SearchBar = () => {
-  const [countrySelected, setCountrySelected] = useState("Global");
-  console.log(countrySelected);
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: 10,
+    minWidth: 200,
+  },
+}));
 
-  console.log(countries);
+const SearchBar = ({ handleChange, countrySelected }) => {
+  const [countries, setCountriesList] = useState([]);
 
-  const handleChange = () => {
-    console.log("hello");
-  };
+  useEffect(() => {
+    async function getCountries() {
+      setCountriesList(await fetchCountryList());
+      if (!countries) {
+        return <CircularProgress />;
+      }
+    }
 
+    getCountries();
+  }, []);
+
+  const classes = useStyles();
   return (
     <div>
-      <FormControl>
+      <FormControl className={classes.formControl}>
         <InputLabel>Country</InputLabel>
-        <Select value={countrySelected} onChange={handleChange}>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        <Select
+          onChange={(e) => handleChange(e.target.value)}
+          value={countrySelected}
+        >
+          {countries
+            ? countries.map((country) => (
+                <MenuItem key={country.name} value={country.name}>
+                  {country.name}
+                </MenuItem>
+              ))
+            : ""}
         </Select>
       </FormControl>
     </div>
