@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { fetchData } from "../api";
 import Cards from "../components/Cards";
-import Map from "../components/Map";
 import SearchBar from "../components/SearchBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
+import Map from "./MapContainer";
 
 class CovidPage extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class CovidPage extends Component {
             handleChange={this.handleChange}
             countrySelected={countrySelected}
           />
-          <Map countrySelected />
+          <Map />
         </this.Wrapper>
       </div>
     );
