@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import { fetchCountryList } from "../api";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,12 @@ const SearchBar = ({ handleChange, countrySelected }) => {
     }
     getCountries();
   }, []);
+  
+  if (!countries.some((abc) => abc.iso2 === countrySelected)) {
+    if (countrySelected !== "world") {
+      countrySelected = "";
+    } 
+  }
 
   const classes = useStyles();
   return (
@@ -32,9 +39,11 @@ const SearchBar = ({ handleChange, countrySelected }) => {
           onChange={(e) => handleChange(e.target.value)}
           value={countrySelected}
         >
+          <MenuItem key="World" value="world">World</MenuItem>
+          <ListSubheader disableSticky>Country</ListSubheader>
           {countries
             ? countries.map((country) => (
-                <MenuItem key={country.name} value={country.name}>
+                <MenuItem key={country.name} value={country.iso2}>
                   {country.name}
                 </MenuItem>
               ))

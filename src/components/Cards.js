@@ -9,8 +9,7 @@ const DivWrapper = styled.div`
 `;
 
 const LastUpdated = styled.h1`
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.8rem;
   margin: 1rem 0;
   font-family: Helvetica;
 `;
@@ -51,15 +50,13 @@ const CardDetail = ({
       thousandSeparator={true}
     />
   );
+  
+  if (lastUpdate !== "-") {
+    lastUpdate = new Date(lastUpdate).toLocaleDateString();
+  }
 
   return (
     <DivWrapper>
-      <LastUpdated>{`Last Updated: ${new Date(
-        lastUpdate
-      ).toDateString()}`}</LastUpdated>
-      <LastUpdated>
-        {countrySelected ? countrySelected : "Global Count"}
-      </LastUpdated>
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <CardBox borderColor={borderColor.confirmed}>
@@ -92,6 +89,7 @@ const CardDetail = ({
           </CardBox>
         </Grid>
       </Grid>
+      <LastUpdated>{`Last Updated: ${lastUpdate}`}</LastUpdated>
     </DivWrapper>
   );
 };

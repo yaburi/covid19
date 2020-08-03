@@ -11,7 +11,7 @@ class CovidPage extends Component {
     super(props);
     this.state = {
       covidData: null,
-      countrySelected: "",
+      countrySelected: "world",
     };
   }
 
@@ -53,13 +53,13 @@ class CovidPage extends Component {
     return (
       <div>
         <this.TitleBar>Covid-19 Statistics</this.TitleBar>
-        <Cards data={covidData} countrySelected={countrySelected} />
         <this.Wrapper>
           <SearchBar
             handleChange={this.handleChange}
             countrySelected={countrySelected}
           />
-          <Map />
+          <Cards data={covidData} countrySelected={countrySelected} />
+          <Map covidData={covidData} handleChange={this.handleChange} />
         </this.Wrapper>
       </div>
     );
