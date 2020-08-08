@@ -27,7 +27,6 @@ const borderColor = {
 
 const CardDetail = ({
   data: { confirmed, deaths, recovered, lastUpdate },
-  countrySelected,
 }) => {
   const confirmedCases = (
     <NumberFormat

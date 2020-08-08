@@ -11,7 +11,8 @@ const geoUrl =
 
 const MapChart = ({
   setTooltipContent,
-  handleChange
+  handleChange,
+  countrySelected
 }) => {
   return (
     <Fragment>
@@ -36,17 +37,16 @@ const MapChart = ({
                   }}
                   style={{
                     default: {
-                      fill: "#D6D6DA",
+                      fill:
+                        countrySelected === geo.properties.ISO_A2
+                          ? "#43AA8B"
+                          : "#577590",
                       outline: "none",
                     },
                     hover: {
-                      fill: "#F53",
+                      fill: "#90BE6D",
                       outline: "none",
-                    },
-                    pressed: {
-                      fill: "#E42",
-                      outline: "none",
-                    },
+                    }
                   }}
                 />
               ))

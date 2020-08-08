@@ -24,7 +24,7 @@ const SearchBar = ({ handleChange, countrySelected }) => {
     getCountries();
   }, []);
   
-  if (!countries.some((abc) => abc.iso2 === countrySelected)) {
+  if (!countries.some((country) => country.iso2 === countrySelected)) {
     if (countrySelected !== "world") {
       countrySelected = "";
     } 

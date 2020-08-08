@@ -59,7 +59,7 @@ class CovidPage extends Component {
             countrySelected={countrySelected}
           />
           <Cards data={covidData} countrySelected={countrySelected} />
-          <Map covidData={covidData} handleChange={this.handleChange} />
+          <Map handleChange={this.handleChange} countrySelected={countrySelected} />
         </this.Wrapper>
       </div>
     );
