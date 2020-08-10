@@ -14,7 +14,7 @@ import { fetchCountryList } from "../api";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: 10,
-    minWidth: 200,
+    minWidth: 400,
   },
   dropDown: {
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",

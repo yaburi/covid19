@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography, CardContent, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import NumberFormat from "react-number-format";
@@ -9,30 +9,25 @@ const DivWrapper = styled.div`
   margin: auto;
 `;
 
-const LastUpdated = styled.h1`
-  font-size: 0.8rem;
-  margin: 1rem 0;
-  font-family: Helvetica;
-`;
-
 const CardBox = styled.div`
   text-align: center;
+  margin: 1rem 0;
 `;
 
 const useStyles = makeStyles((theme) => ({
   confirmed: {
     fontWeight: "bold",
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     color: "#ff9f1c",
   },
   recovered: {
     fontWeight: "bold",
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     color: "#2ec4b6",
   },
   deaths: {
     fontWeight: "bold",
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     color: "#e71d36",
   },
 }));
@@ -62,53 +57,36 @@ const CardDetail = ({
     />
   );
   
-  if (lastUpdate !== "-") {
-    lastUpdate = new Date(lastUpdate).toLocaleDateString();
-  }
-  
   const classes = useStyles();
 
   return (
     <DivWrapper>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={4}>
           <CardBox>
-            <Card>
-              <CardContent>
-                <Typography>Confirmed</Typography>
-                <Typography className={classes.confirmed}>
-                  {confirmedCases}
-                </Typography>
-              </CardContent>
-            </Card>
+            <Typography>Confirmed</Typography>
+            <Typography className={classes.confirmed}>
+              {confirmedCases}
+            </Typography>
           </CardBox>
         </Grid>
         <Grid item xs={4}>
           <CardBox>
-            <Card>
-              <CardContent>
-                <Typography>Recovered</Typography>
-                <Typography className={classes.recovered}>
-                  {recoveredCases}
-                </Typography>
-              </CardContent>
-            </Card>
+            <Typography>Recovered</Typography>
+            <Typography className={classes.recovered}>
+              {recoveredCases}
+            </Typography>
           </CardBox>
         </Grid>
         <Grid item xs={4}>
           <CardBox>
-            <Card>
-              <CardContent>
-                <Typography>Deaths</Typography>
-                <Typography className={classes.deaths}>
-                  {confirmedDeaths}
-                </Typography>
-              </CardContent>
-            </Card>
+            <Typography>Deaths</Typography>
+            <Typography className={classes.deaths}>
+              {confirmedDeaths}
+            </Typography>
           </CardBox>
         </Grid>
       </Grid>
-      <LastUpdated>{`Last Updated: ${lastUpdate}`}</LastUpdated>
     </DivWrapper>
   );
 };

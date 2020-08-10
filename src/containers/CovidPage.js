@@ -41,8 +41,16 @@ class CovidPage extends Component {
     text-align: center;
   `;
 
+  Footer = styled.div`
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 1rem;
+    font-family: Helvetica;
+  `;
+
   render() {
     const { covidData, countrySelected } = this.state;
+
     if (!covidData) {
       return (
         <this.Wrapper>
@@ -50,6 +58,13 @@ class CovidPage extends Component {
         </this.Wrapper>
       );
     }
+
+    if (covidData.lastUpdate !== "-") {
+      covidData.lastUpdate = new Date(
+        covidData.lastUpdate
+      ).toLocaleDateString();
+    }
+
     return (
       <div>
         <this.TitleBar>Covid-19 Statistics</this.TitleBar>
@@ -64,6 +79,26 @@ class CovidPage extends Component {
             countrySelected={countrySelected}
           />
         </this.Wrapper>
+        <this.Footer>
+          Last updated: {covidData.lastUpdate}
+          {" // "}
+          Created by{" "}
+          <a
+            href="https://github.com/yaburi/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @yaburi
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://github.com/preetycool/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @preetycool
+          </a>
+        </this.Footer>
       </div>
     );
   }
