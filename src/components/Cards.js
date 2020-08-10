@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Typography, CardContent, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import NumberFormat from "react-number-format";
 
@@ -16,14 +17,25 @@ const LastUpdated = styled.h1`
 
 const CardBox = styled.div`
   text-align: center;
-  border-top: ${(props) => props.borderColor};
 `;
 
-const borderColor = {
-  deaths: "5px solid red",
-  recovered: "5px solid green",
-  confirmed: "5px solid orange",
-};
+const useStyles = makeStyles((theme) => ({
+  confirmed: {
+    fontWeight: "bold",
+    fontSize: "2rem",
+    color: "#ff9f1c",
+  },
+  recovered: {
+    fontWeight: "bold",
+    fontSize: "2rem",
+    color: "#2ec4b6",
+  },
+  deaths: {
+    fontWeight: "bold",
+    fontSize: "2rem",
+    color: "#e71d36",
+  },
+}));
 
 const CardDetail = ({
   data: { confirmed, deaths, recovered, lastUpdate },
@@ -53,36 +65,44 @@ const CardDetail = ({
   if (lastUpdate !== "-") {
     lastUpdate = new Date(lastUpdate).toLocaleDateString();
   }
+  
+  const classes = useStyles();
 
   return (
     <DivWrapper>
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <CardBox borderColor={borderColor.confirmed}>
+          <CardBox>
             <Card>
               <CardContent>
                 <Typography>Confirmed</Typography>
-                <Typography variant="body1">{confirmedCases}</Typography>
+                <Typography className={classes.confirmed}>
+                  {confirmedCases}
+                </Typography>
               </CardContent>
             </Card>
           </CardBox>
         </Grid>
         <Grid item xs={4}>
-          <CardBox borderColor={borderColor.recovered}>
+          <CardBox>
             <Card>
               <CardContent>
                 <Typography>Recovered</Typography>
-                <Typography>{recoveredCases}</Typography>
+                <Typography className={classes.recovered}>
+                  {recoveredCases}
+                </Typography>
               </CardContent>
             </Card>
           </CardBox>
         </Grid>
         <Grid item xs={4}>
-          <CardBox borderColor={borderColor.deaths}>
+          <CardBox>
             <Card>
               <CardContent>
                 <Typography>Deaths</Typography>
-                <Typography>{confirmedDeaths}</Typography>
+                <Typography className={classes.deaths}>
+                  {confirmedDeaths}
+                </Typography>
               </CardContent>
             </Card>
           </CardBox>

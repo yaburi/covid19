@@ -17,8 +17,8 @@ const MapChart = ({
   return (
     <Fragment>
       <ComposableMap data-tip="" height={300}>
-        <ZoomableGroup center={[15, 0]} zoom={0.5} minZoom={0.5}>
-          <Geographies geography={geoUrl} stroke="#FFFFFF" strokeWidth={0.5}>
+        <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
+          <Geographies geography={geoUrl} stroke="#fff" strokeWidth={1}>
             {({ geographies }) =>
               geographies.map((geo) => (
                 <Geography
@@ -39,14 +39,14 @@ const MapChart = ({
                     default: {
                       fill:
                         countrySelected === geo.properties.ISO_A2
-                          ? "#43AA8B"
-                          : "#577590",
+                          ? "#2196F3"
+                          : "#D3D7DA",
                       outline: "none",
                     },
                     hover: {
-                      fill: "#90BE6D",
+                      fill: "#21CBF3",
                       outline: "none",
-                    }
+                    },
                   }}
                 />
               ))

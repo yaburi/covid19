@@ -30,10 +30,10 @@ class CovidPage extends Component {
     text-align: center;
     padding: 1.5rem 0;
     margin-bottom: 1rem;
-    background: #174558;
+    background: #293241;
     font-size: 1.5rem;
     color: white;
-    font-family: Montserrat, Helvetica;
+    font-family: Roboto, Helvetica;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
   `;
 
@@ -59,7 +59,10 @@ class CovidPage extends Component {
             countrySelected={countrySelected}
           />
           <Cards data={covidData} countrySelected={countrySelected} />
-          <Map handleChange={this.handleChange} countrySelected={countrySelected} />
+          <Map
+            handleChange={this.handleChange}
+            countrySelected={countrySelected}
+          />
         </this.Wrapper>
       </div>
     );
