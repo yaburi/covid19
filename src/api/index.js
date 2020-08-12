@@ -5,7 +5,7 @@ const countryUrl = `${baseUrl}/countries/`;
 
 export const fetchData = async (country = "") => {
   let url = baseUrl;
-  if (country) {
+  if (country && country !== "world") {
     url = `${countryUrl}${country}`;
   }
   try {
@@ -15,6 +15,13 @@ export const fetchData = async (country = "") => {
     return { confirmed, recovered, deaths, lastUpdate };
   } catch (error) {
     console.log(error);
+    const data = {
+      confirmed: { value: "-" },
+      recovered: { value: "-" },
+      deaths: { value: "-" },
+      lastUpdate: "-",
+    };
+    return data;
   }
 };
 
