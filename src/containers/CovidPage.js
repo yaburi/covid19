@@ -65,7 +65,7 @@ class CovidPage extends Component {
     if (covidData.lastUpdate !== "-") {
       covidData.lastUpdate = new Date(
         covidData.lastUpdate
-      ).toLocaleDateString();
+      ).toDateString();
     }
 
     return (
