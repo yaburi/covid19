@@ -14,7 +14,6 @@ export const fetchData = async (country = "") => {
     } = await axios.get(url);
     return { confirmed, recovered, deaths, lastUpdate };
   } catch (error) {
-    console.log(error);
     const data = {
       confirmed: { value: "-" },
       recovered: { value: "-" },
@@ -40,5 +39,37 @@ export const fetchCountryList = async () => {
     return response.data.countries;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const fetchAllCountryConfirmedData = async () => {
+  try {
+    const countryArray = await fetchCountryList();
+    const allCountryData = [];
+    countryArray.map(async (country) => {
+      const individualCountryInfo = await fetchIndividualCountryTotalData(
+        country
+      );
+      if (!!individualCountryInfo) {
+        allCountryData.push({
+          name: country.name,
+          iso2: country.iso2,
+          ...individualCountryInfo,
+        });
+      }
+    });
+    console.log(allCountryData);
+    return allCountryData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchIndividualCountryTotalData = async ({ name }) => {
+  try {
+    const countryData = await axios.get(`${countryUrl}${name}`);
+    return countryData.data.confirmed;
+  } catch (e) {
+    console.log(e);
   }
 };
