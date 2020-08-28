@@ -70,7 +70,7 @@ class CovidPage extends Component {
 
     return (
       <div>
-        <this.TitleBar>Covid-19 Statistics</this.TitleBar>
+        <this.TitleBar>COVID-19 Statistics</this.TitleBar>
         <this.Wrapper>
           <SearchBar
             handleChange={this.handleChange}
