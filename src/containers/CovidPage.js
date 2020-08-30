@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchData } from "../api";
+import { fetchData, fetchAllCountryConfirmedData } from "../api";
 import Cards from "../components/Cards";
 import SearchBar from "../components/SearchBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -12,12 +12,15 @@ class CovidPage extends Component {
     this.state = {
       covidData: null,
       countrySelected: "world",
+      allCountryData: null,
     };
   }
 
   async componentDidMount() {
     const covidData = await fetchData();
+    const allCountryData = await fetchAllCountryConfirmedData();
     this.setState({ covidData: covidData });
+    this.setState({ allCountryData: allCountryData });
   }
 
   handleChange = async (country) => {
@@ -49,9 +52,9 @@ class CovidPage extends Component {
   `;
 
   render() {
-    const { covidData, countrySelected } = this.state;
+    const { covidData, countrySelected, allCountryData } = this.state;
 
-    if (!covidData) {
+    if (!covidData || !allCountryData) {
       return (
         <this.Wrapper>
           <CircularProgress />
@@ -77,6 +80,7 @@ class CovidPage extends Component {
           <Map
             handleChange={this.handleChange}
             countrySelected={countrySelected}
+            allCountryData={allCountryData}
           />
         </this.Wrapper>
         <this.Footer>
