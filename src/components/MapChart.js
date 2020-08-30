@@ -27,10 +27,14 @@ const COLOR_RANGE = [
   "#800000",
   "#701C1C",
   "#3C1414",
-  "#321414",
 ];
 
-const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
+const MapChart = ({
+  setTooltipContent,
+  handleChange,
+  allCountryData,
+  countrySelected,
+}) => {
   const [isLoadingChloropleth, setIsLoadingChloropleth] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -71,11 +75,17 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
                     fill={current ? colourScale(current.value) : DEFAULT_COLOR}
                     style={{
                       default: {
+                        fill:
+                          countrySelected === geo.properties.ISO_A2
+                            ? "#065180" // show this colour if a country is selected
+                            : current
+                            ? colourScale(current.value) // else show the choropleth colours
+                            : DEFAULT_COLOR,
                         outline: "none",
                       },
                       hover: {
-                        fill: "#21CBF3",
-                        transition: "all 250ms",
+                        fill: "#93cef5",
+                        transition: "all 100ms",
                         outline: "none",
                       },
                     }}
@@ -86,7 +96,6 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-      )
     </>
   );
 };

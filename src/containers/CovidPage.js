@@ -65,12 +65,12 @@ class CovidPage extends Component {
     if (covidData.lastUpdate !== "-") {
       covidData.lastUpdate = new Date(
         covidData.lastUpdate
-      ).toLocaleDateString();
+      ).toDateString();
     }
 
     return (
       <div>
-        <this.TitleBar>Covid-19 Statistics</this.TitleBar>
+        <this.TitleBar>COVID-19 Statistics</this.TitleBar>
         <this.Wrapper>
           <SearchBar
             handleChange={this.handleChange}
