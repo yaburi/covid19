@@ -30,6 +30,7 @@ const COLOR_RANGE = [
 ];
 
 const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySelected }) => {
+  // eslint-disable-line no-unused-vars
   const [state, setState] = useState("");
   useEffect(() => {
     setTimeout(() => {
