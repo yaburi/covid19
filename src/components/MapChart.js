@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from "react";
 import { scaleQuantile } from "d3-scale";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import {
   ZoomableGroup,
@@ -28,13 +29,12 @@ const COLOR_RANGE = [
   "#3C1414",
 ];
 
-const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySelected }) => {
-  // eslint-disable-line no-unused-vars
-  const [state, setState] = useState("");
+const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
+  const [isLoadingChloropleth, setIsLoadingChloropleth] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      setState("setting timeout");
-    }, 1000);
+      setIsLoadingChloropleth(false);
+    }, 2000);
   }, []);
 
   const colourScale = scaleQuantile()
@@ -43,6 +43,7 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySele
 
   return (
     <>
+      {isLoadingChloropleth ? <CircularProgress /> : ""}
       <ComposableMap data-tip="" height={300}>
         <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
           <Geographies geography={geoData} stroke="#fff" strokeWidth={1}>
@@ -66,6 +67,7 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySele
                     onMouseLeave={() => {
                       setTooltipContent("");
                     }}
+                    fill={current ? colourScale(current.value) : DEFAULT_COLOR}
                     style={{
                       default: {
                         fill:
@@ -89,6 +91,7 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySele
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
+      )
     </>
   );
 };
