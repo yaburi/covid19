@@ -12,6 +12,7 @@ const DivWrapper = styled.div`
 const CardBox = styled.div`
   text-align: center;
   margin: 1rem 0;
+  padding: 0;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -32,9 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardDetail = ({
-  data: { confirmed, deaths, recovered, lastUpdate },
-}) => {
+const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
   const confirmedCases = (
     <NumberFormat
       value={confirmed.value}
@@ -56,13 +55,13 @@ const CardDetail = ({
       thousandSeparator={true}
     />
   );
-  
+
   const classes = useStyles();
 
   return (
     <DivWrapper>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <CardBox>
             <Typography>Confirmed</Typography>
             <Typography className={classes.confirmed}>
@@ -70,7 +69,7 @@ const CardDetail = ({
             </Typography>
           </CardBox>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <CardBox>
             <Typography>Recovered</Typography>
             <Typography className={classes.recovered}>
@@ -78,7 +77,7 @@ const CardDetail = ({
             </Typography>
           </CardBox>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <CardBox>
             <Typography>Deaths</Typography>
             <Typography className={classes.deaths}>
