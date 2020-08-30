@@ -47,9 +47,7 @@ export const fetchAllCountryConfirmedData = async () => {
     const countryArray = await fetchCountryList();
     const allCountryData = [];
     countryArray.map(async (country) => {
-      const individualCountryInfo = await fetchIndividualCountryTotalData(
-        country
-      );
+      const individualCountryInfo = await fetchIndividualCountryTotalData(country);
       if (!!individualCountryInfo) {
         allCountryData.push({
           name: country.name,
@@ -68,8 +66,10 @@ export const fetchAllCountryConfirmedData = async () => {
 export const fetchIndividualCountryTotalData = async ({ name }) => {
   try {
     const countryData = await axios.get(`${countryUrl}${name}`);
-    return countryData.data.confirmed;
+    if (countryData) {
+      return countryData.data.confirmed;
+    }
   } catch (e) {
-    console.log(e);
+    console.log(e + " " + name);
   }
 };

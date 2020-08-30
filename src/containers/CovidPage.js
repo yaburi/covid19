@@ -17,10 +17,14 @@ class CovidPage extends Component {
   }
 
   async componentDidMount() {
+    console.log("componentDidMount started");
     const covidData = await fetchData();
-    const allCountryData = await fetchAllCountryConfirmedData();
     this.setState({ covidData: covidData });
-    this.setState({ allCountryData: allCountryData });
+    const allCountryData = await fetchAllCountryConfirmedData();
+    if (allCountryData) {
+      this.setState({ allCountryData: allCountryData });
+    }
+    console.log("componentDidMount finished");
   }
 
   handleChange = async (country) => {
@@ -53,7 +57,6 @@ class CovidPage extends Component {
 
   render() {
     const { covidData, countrySelected, allCountryData } = this.state;
-    console.log(allCountryData);
 
     if (!covidData || !allCountryData) {
       return (
