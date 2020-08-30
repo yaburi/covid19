@@ -29,7 +29,8 @@ const COLOR_RANGE = [
   "#321414",
 ];
 
-const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
+const MapChart = ({ setTooltipContent, handleChange, allCountryData, countrySelected }) => {
+  // eslint-disable-line no-unused-vars
   const [state, setState] = useState("");
   useEffect(() => {
     setTimeout(() => {
@@ -66,14 +67,19 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
                     onMouseLeave={() => {
                       setTooltipContent("");
                     }}
-                    fill={current ? colourScale(current.value) : DEFAULT_COLOR}
                     style={{
                       default: {
+                        fill:
+                          countrySelected === geo.properties.ISO_A2
+                            ? "#2196F3"
+                            : current
+                            ? colourScale(current.value)
+                            : DEFAULT_COLOR,
                         outline: "none",
                       },
                       hover: {
                         fill: "#21CBF3",
-                        transition: "all 250ms",
+                        transition: "all 100ms",
                         outline: "none",
                       },
                     }}
