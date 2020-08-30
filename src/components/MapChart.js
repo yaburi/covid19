@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from "react";
 import { scaleQuantile } from "d3-scale";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import {
   ZoomableGroup,
@@ -30,10 +31,10 @@ const COLOR_RANGE = [
 ];
 
 const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
-  const [state, setState] = useState("");
+  const [isLoadingChloropleth, setIsLoadingChloropleth] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      setState("setting timeout");
+      setIsLoadingChloropleth(false);
     }, 1000);
   }, []);
 
@@ -43,47 +44,53 @@ const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
 
   return (
     <>
-      <ComposableMap data-tip="" height={300}>
-        <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
-          <Geographies geography={geoData} stroke="#fff" strokeWidth={1}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const current = allCountryData.find(
-                  (country) => country.iso2 === geo.properties.ISO_A2
-                );
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    onClick={() => {
-                      const { ISO_A2 } = geo.properties;
-                      handleChange(ISO_A2);
-                    }}
-                    onMouseEnter={() => {
-                      const { NAME } = geo.properties;
-                      setTooltipContent(`${NAME} `);
-                    }}
-                    onMouseLeave={() => {
-                      setTooltipContent("");
-                    }}
-                    fill={current ? colourScale(current.value) : DEFAULT_COLOR}
-                    style={{
-                      default: {
-                        outline: "none",
-                      },
-                      hover: {
-                        fill: "#21CBF3",
-                        transition: "all 250ms",
-                        outline: "none",
-                      },
-                    }}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        </ZoomableGroup>
-      </ComposableMap>
+      {isLoadingChloropleth ? (
+        <CircularProgress />
+      ) : (
+        <ComposableMap data-tip="" height={300}>
+          <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
+            <Geographies geography={geoData} stroke="#fff" strokeWidth={1}>
+              {({ geographies }) =>
+                geographies.map((geo) => {
+                  const current = allCountryData.find(
+                    (country) => country.iso2 === geo.properties.ISO_A2
+                  );
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      onClick={() => {
+                        const { ISO_A2 } = geo.properties;
+                        handleChange(ISO_A2);
+                      }}
+                      onMouseEnter={() => {
+                        const { NAME } = geo.properties;
+                        setTooltipContent(`${NAME} `);
+                      }}
+                      onMouseLeave={() => {
+                        setTooltipContent("");
+                      }}
+                      fill={
+                        current ? colourScale(current.value) : DEFAULT_COLOR
+                      }
+                      style={{
+                        default: {
+                          outline: "none",
+                        },
+                        hover: {
+                          fill: "#21CBF3",
+                          transition: "all 250ms",
+                          outline: "none",
+                        },
+                      }}
+                    />
+                  );
+                })
+              }
+            </Geographies>
+          </ZoomableGroup>
+        </ComposableMap>
+      )}
     </>
   );
 };
