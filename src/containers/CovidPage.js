@@ -53,7 +53,6 @@ class CovidPage extends Component {
 
   render() {
     const { covidData, countrySelected, allCountryData } = this.state;
-    console.log(allCountryData);
 
     if (!covidData || !allCountryData) {
       return (

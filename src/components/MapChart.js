@@ -1,5 +1,6 @@
-import React, { memo, Fragment } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { scaleQuantile } from "d3-scale";
+
 import {
   ZoomableGroup,
   ComposableMap,
@@ -28,26 +29,28 @@ const COLOR_RANGE = [
   "#321414",
 ];
 
-const MapChart = ({
-  setTooltipContent,
-  handleChange,
-  countrySelected,
-  allCountryData,
-}) => {
+const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
+  const [state, setState] = useState("");
+  useEffect(() => {
+    setTimeout(() => {
+      setState("setting timeout");
+    }, 1000);
+  }, []);
+
   const colourScale = scaleQuantile()
     .domain(allCountryData.map((country) => country.value))
     .range(COLOR_RANGE);
 
   return (
-    <Fragment>
+    <>
       <ComposableMap data-tip="" height={300}>
         <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
           <Geographies geography={geoData} stroke="#fff" strokeWidth={1}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const current = allCountryData
-                  ? allCountryData.find((s) => s.iso2 === geo.properties.ISO_A2)
-                  : "";
+                const current = allCountryData.find(
+                  (country) => country.iso2 === geo.properties.ISO_A2
+                );
                 return (
                   <Geography
                     key={geo.rsmKey}
@@ -81,7 +84,7 @@ const MapChart = ({
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-    </Fragment>
+    </>
   );
 };
 

@@ -47,18 +47,14 @@ export const fetchAllCountryConfirmedData = async () => {
     const countryArray = await fetchCountryList();
     const allCountryData = [];
     countryArray.map(async (country) => {
-      const individualCountryInfo = await fetchIndividualCountryTotalData(
-        country
-      );
-      if (!!individualCountryInfo) {
+      await fetchIndividualCountryTotalData(country).then((res) => {
         allCountryData.push({
           name: country.name,
           iso2: country.iso2,
-          ...individualCountryInfo,
+          ...res,
         });
-      }
+      });
     });
-    console.log(allCountryData);
     return allCountryData;
   } catch (error) {
     console.log(error);
@@ -67,8 +63,10 @@ export const fetchAllCountryConfirmedData = async () => {
 
 export const fetchIndividualCountryTotalData = async ({ name }) => {
   try {
-    const countryData = await axios.get(`${countryUrl}${name}`);
-    return countryData.data.confirmed;
+    const countryData = await axios.get(`${countryUrl}${name}`).then((res) => {
+      return res.data.confirmed;
+    });
+    return countryData;
   } catch (e) {
     console.log(e);
   }
