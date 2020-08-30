@@ -96,7 +96,6 @@ const MapChart = ({
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-      )
     </>
   );
 };
