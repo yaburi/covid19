@@ -29,7 +29,12 @@ const COLOR_RANGE = [
   "#3C1414",
 ];
 
-const MapChart = ({ setTooltipContent, handleChange, allCountryData }) => {
+const MapChart = ({
+  setTooltipContent,
+  handleChange,
+  allCountryData,
+  countrySelected,
+}) => {
   const [isLoadingChloropleth, setIsLoadingChloropleth] = useState(true);
   useEffect(() => {
     setTimeout(() => {
