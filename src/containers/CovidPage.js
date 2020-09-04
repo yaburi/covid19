@@ -30,6 +30,11 @@ class CovidPage extends Component {
   };
 
   TitleBar = styled.header`
+    @media (max-width: 813px) {
+      font-size: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
     text-align: center;
     padding: 1.5rem 0;
     margin-bottom: 1rem;
@@ -44,6 +49,12 @@ class CovidPage extends Component {
     text-align: center;
   `;
 
+  Loader = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  `;
+
   Footer = styled.div`
     text-align: center;
     font-size: 0.7rem;
@@ -56,16 +67,14 @@ class CovidPage extends Component {
 
     if (!covidData || !allCountryData) {
       return (
-        <this.Wrapper>
+        <this.Loader>
           <CircularProgress />
-        </this.Wrapper>
+        </this.Loader>
       );
     }
 
     if (covidData.lastUpdate !== "-") {
-      covidData.lastUpdate = new Date(
-        covidData.lastUpdate
-      ).toDateString();
+      covidData.lastUpdate = new Date(covidData.lastUpdate).toDateString();
     }
 
     return (

@@ -29,6 +29,11 @@ const COLOR_RANGE = [
   "#3C1414",
 ];
 
+const getMapCenter = () => {
+  const isMobile = window.innerWidth < 600;
+  return isMobile ? [120,0] : [15,0];
+};
+
 const MapChart = ({
   setTooltipContent,
   handleChange,
@@ -41,16 +46,20 @@ const MapChart = ({
       setIsLoadingChloropleth(false);
     }, 2000);
   }, []);
+  
+  const mapCenter = getMapCenter();
 
   const colourScale = scaleQuantile()
     .domain(allCountryData.map((country) => country.value))
-    .range(COLOR_RANGE);
-
+    .range(COLOR_RANGE);  
+    
   return (
     <>
-      {isLoadingChloropleth ? <CircularProgress /> : ""}
+      <div className="loader">
+        {isLoadingChloropleth ? <CircularProgress /> : ""}
+      </div>
       <ComposableMap data-tip="" height={300}>
-        <ZoomableGroup center={[15, 0]} zoom={0.6} minZoom={0.6}>
+        <ZoomableGroup center={mapCenter} zoom={0.6} minZoom={0.6}>
           <Geographies geography={geoData} stroke="#fff" strokeWidth={1}>
             {({ geographies }) =>
               geographies.map((geo) => {

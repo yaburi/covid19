@@ -5,7 +5,10 @@ import styled from "styled-components";
 import NumberFormat from "react-number-format";
 
 const DivWrapper = styled.div`
-  width: 70%;
+  @media (max-width: 414px) {
+    width: 90%;
+  }
+  width: 60%;
   margin: auto;
 `;
 
@@ -19,16 +22,25 @@ const useStyles = makeStyles((theme) => ({
   confirmed: {
     fontWeight: "bold",
     fontSize: "1.5rem",
+    "@media (max-width:813px)": {
+      fontSize: "1rem",
+    },
     color: "#ff9f1c",
   },
   recovered: {
     fontWeight: "bold",
     fontSize: "1.5rem",
+    "@media (max-width:813px)": {
+      fontSize: "1rem",
+    },
     color: "#2ec4b6",
   },
   deaths: {
     fontWeight: "bold",
     fontSize: "1.5rem",
+    "@media (max-width:813px)": {
+      fontSize: "1rem",
+    },
     color: "#e71d36",
   },
 }));
@@ -61,7 +73,7 @@ const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
   return (
     <DivWrapper>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={4} md={4}>
           <CardBox>
             <Typography>Confirmed</Typography>
             <Typography className={classes.confirmed}>
@@ -69,7 +81,7 @@ const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
             </Typography>
           </CardBox>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={4} md={4}>
           <CardBox>
             <Typography>Recovered</Typography>
             <Typography className={classes.recovered}>
@@ -77,7 +89,7 @@ const CardDetail = ({ data: { confirmed, deaths, recovered, lastUpdate } }) => {
             </Typography>
           </CardBox>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={4} md={4}>
           <CardBox>
             <Typography>Deaths</Typography>
             <Typography className={classes.deaths}>
