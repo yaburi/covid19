@@ -5,6 +5,7 @@ import "../styles/Map.scss";
 
 const Map = ({ handleChange, countrySelected, allCountryData }) => {
   const [content, setContent] = useState("");
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <div className="mapContainer">
@@ -14,7 +15,13 @@ const Map = ({ handleChange, countrySelected, allCountryData }) => {
         countrySelected={countrySelected}
         allCountryData={allCountryData}
       />
-      <ReactTooltip className="toolTip">{content}</ReactTooltip>
+      <ReactTooltip
+        className="toolTip"
+        style={{ cursor: "pointer" }}
+        globalEventOff={isMobile ? "touchstart" : undefined}
+      >
+        {content}
+      </ReactTooltip>
     </div>
   );
 };
