@@ -13,6 +13,10 @@ import { fetchCountryList } from "../api";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
+    "@media (max-width:414px)": {
+      margin: 5,
+      minWidth: 330,
+    },
     margin: 10,
     minWidth: 400,
   },
@@ -20,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
     color: "white",
     height: "3rem",
+    "@media (max-width:414px)": {
+      height: "2.25rem",
+    },
     boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
   },
 }));

@@ -7,7 +7,7 @@ const Map = ({ handleChange, countrySelected, allCountryData }) => {
   const [content, setContent] = useState("");
 
   return (
-    <>
+    <div className="mapContainer">
       <MapChart
         setTooltipContent={setContent}
         handleChange={handleChange}
@@ -15,7 +15,7 @@ const Map = ({ handleChange, countrySelected, allCountryData }) => {
         allCountryData={allCountryData}
       />
       <ReactTooltip className="toolTip">{content}</ReactTooltip>
-    </>
+    </div>
   );
 };
 

@@ -5,3 +5,18 @@ $light-color: #fff;
   font: 100% $font-stack !important;
   color: $light-color;
 }
+
+.mapContainer {
+  @media (max-width: 414px) {
+    width: 300%;
+  }
+  @media (max-width: 375px) {
+    width: 260%;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
