@@ -1,3 +1,4 @@
+
 # COVID-19 Statistics & World Map
 ![Image of COVID-19 map](https://i.imgur.com/VdztISO.png)
 Created by [@yaburi](https://github.com/yaburi/) and [@preetycool](https://github.com/preetycool/)
@@ -18,3 +19,7 @@ React Tooltip
 ### UI Components
 Material UI
 - https://material-ui.com/
+
+### Special Credit
+- Javascript Mastery - https://www.youtube.com/watch?v=khJlrj3Y6Ls&t=3913s
+- Varun Kumar - https://medium.com/@varunon9/building-choropleth-map-heatmap-of-india-in-javascript-using-react-simple-maps-2e71758fc4df
