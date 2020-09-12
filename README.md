@@ -66,3 +66,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+--------------------------------------------------
+Special thanks and credit to:
+1. Javascript Mastery - https://www.youtube.com/watch?v=khJlrj3Y6Ls&t=3913s
+2. Varun Kumar - https://medium.com/@varunon9/building-choropleth-map-heatmap-of-india-in-javascript-using-react-simple-maps-2e71758fc4df
